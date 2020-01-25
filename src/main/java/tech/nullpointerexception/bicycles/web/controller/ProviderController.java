@@ -13,6 +13,8 @@ import tech.nullpointerexception.bicycles.web.exception.ProviderException;
 import tech.nullpointerexception.bicycles.web.model.ProviderDto;
 
 import javax.validation.Valid;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.Optional;
 
 @RestController
@@ -35,8 +37,11 @@ public class ProviderController {
         ProviderDto savedProvider = Optional.ofNullable(providerService.createProvider(provider))
                 .orElseThrow(() -> new ProviderException(UtilConstants.ERROR_WHILE_CREATING_PROVIDER));
         HttpHeaders headers = new HttpHeaders();
-        //Todo: añadir hostname a header
-        headers.add("Location", "/api/v1/provider/" + savedProvider.getId().toString());
+        try {
+            headers.add("Location", InetAddress.getLocalHost().getHostName() + "/api/v1/provider/" + savedProvider.getId().toString());
+        } catch (UnknownHostException e) {
+            headers.add("Location", "/api/v1/provider/" + savedProvider.getId().toString());
+        }
         return new ResponseEntity<>(savedProvider, headers, HttpStatus.CREATED);
     }
 

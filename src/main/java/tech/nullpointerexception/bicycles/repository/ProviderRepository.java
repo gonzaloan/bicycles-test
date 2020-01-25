@@ -12,4 +12,6 @@ public interface ProviderRepository extends JpaRepository<Provider, Long> {
 
     Provider findByProviderDni(String providerDni);
 
+    void deleteByProviderDni(String providerDni);
+
 }
