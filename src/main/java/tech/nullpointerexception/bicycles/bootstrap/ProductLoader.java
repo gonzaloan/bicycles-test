@@ -7,6 +7,10 @@ import tech.nullpointerexception.bicycles.model.Product;
 import tech.nullpointerexception.bicycles.model.Provider;
 import tech.nullpointerexception.bicycles.repository.ProductRepository;
 
+/**
+ * Componente Bootstrap para cargar un par de datos de prueba
+ * al iniciar la aplicación.
+ */
 @Component
 @RequiredArgsConstructor
 public class ProductLoader implements CommandLineRunner {

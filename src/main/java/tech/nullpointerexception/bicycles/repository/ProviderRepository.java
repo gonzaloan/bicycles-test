@@ -7,6 +7,7 @@ import tech.nullpointerexception.bicycles.model.Provider;
 @Repository
 public interface ProviderRepository extends JpaRepository<Provider, Long> {
 
+
     Provider findById(String id);
 
     Provider findByProviderDni(String providerDni);
