@@ -1,12 +1,12 @@
-package tech.nullpointerexception.bicycles.web.exception;
+package tech.nullpointerexception.bicycles.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-public class ProviderException extends RuntimeException {
+public class ProductException extends RuntimeException {
 
-    public ProviderException(String error) {
+    public ProductException(String error) {
         super(error);
     }
 }

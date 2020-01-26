@@ -1,4 +1,4 @@
-package tech.nullpointerexception.bicycles.web.exception;
+package tech.nullpointerexception.bicycles.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

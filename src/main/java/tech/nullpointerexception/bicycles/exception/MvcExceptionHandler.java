@@ -1,4 +1,4 @@
-package tech.nullpointerexception.bicycles.web.exception;
+package tech.nullpointerexception.bicycles.exception;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -62,9 +62,9 @@ public class MvcExceptionHandler extends ResponseEntityExceptionHandler {
     /**
      * Controlador para errores generales del servidor referentes al provider.
      */
-    @ExceptionHandler(ProviderException.class)
+    @ExceptionHandler(value = {ProviderException.class, ProductException.class})
     @ResponseStatus(value = INTERNAL_SERVER_ERROR)
-    public ErrorResponse handleExceptionGeneralProvider(ProviderException e) {
+    public ErrorResponse handleExceptionGeneral(RuntimeException e) {
         return ErrorResponse
                 .builder()
                 .timestamp(LocalDateTime.now())

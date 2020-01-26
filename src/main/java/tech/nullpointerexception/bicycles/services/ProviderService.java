@@ -1,6 +1,6 @@
 package tech.nullpointerexception.bicycles.services;
 
-import tech.nullpointerexception.bicycles.web.model.ProviderDto;
+import tech.nullpointerexception.bicycles.dto.ProviderDto;
 
 public interface ProviderService {
     /**

@@ -6,13 +6,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import tech.nullpointerexception.bicycles.repository.ProviderRepository;
-import tech.nullpointerexception.bicycles.services.ProviderService;
 import tech.nullpointerexception.bicycles.util.TestConstants;
-import tech.nullpointerexception.bicycles.web.mappers.ProviderMapper;
-import tech.nullpointerexception.bicycles.web.model.ProviderDto;
+import tech.nullpointerexception.bicycles.mappers.ProviderMapper;
+import tech.nullpointerexception.bicycles.dto.ProviderDto;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.any;

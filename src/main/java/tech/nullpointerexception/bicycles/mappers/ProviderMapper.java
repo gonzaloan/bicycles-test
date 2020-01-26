@@ -1,9 +1,9 @@
-package tech.nullpointerexception.bicycles.web.mappers;
+package tech.nullpointerexception.bicycles.mappers;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 import tech.nullpointerexception.bicycles.model.Provider;
-import tech.nullpointerexception.bicycles.web.model.ProviderDto;
+import tech.nullpointerexception.bicycles.dto.ProviderDto;
 
 @Mapper
 public interface ProviderMapper {

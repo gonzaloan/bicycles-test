@@ -1,4 +1,4 @@
-package tech.nullpointerexception.bicycles.web.model;
+package tech.nullpointerexception.bicycles.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;

@@ -3,12 +3,14 @@ package tech.nullpointerexception.bicycles.services.impl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import tech.nullpointerexception.bicycles.dto.ProviderDto;
+import tech.nullpointerexception.bicycles.exception.NotFoundException;
+import tech.nullpointerexception.bicycles.exception.ProviderException;
+import tech.nullpointerexception.bicycles.mappers.ProviderMapper;
 import tech.nullpointerexception.bicycles.model.Provider;
 import tech.nullpointerexception.bicycles.repository.ProviderRepository;
 import tech.nullpointerexception.bicycles.services.ProviderService;
-import tech.nullpointerexception.bicycles.web.exception.NotFoundException;
-import tech.nullpointerexception.bicycles.web.mappers.ProviderMapper;
-import tech.nullpointerexception.bicycles.web.model.ProviderDto;
+import tech.nullpointerexception.bicycles.util.UtilConstants;
 
 import java.util.Optional;
 
@@ -30,6 +32,8 @@ public class ProviderServiceImpl implements ProviderService {
     @Override
     public ProviderDto createProvider(ProviderDto newProvider) {
         log.debug("Creando un proveedor {}", newProvider.toString());
+        if (providerRepository.findByProviderDni(newProvider.getProviderDni()) != null)
+            throw new ProviderException(UtilConstants.CANT_REPEAT_PROVIDER_ID);
         return Optional.of(newProvider)
                 .map(ProviderMapper.INSTANCE::providerDtoToProvider)
                 .map(providerRepository::save)
@@ -43,7 +47,6 @@ public class ProviderServiceImpl implements ProviderService {
         Provider provider = Optional.ofNullable(providerRepository.findByProviderDni(providerDni)).orElseThrow(NotFoundException::new);
         provider.setProviderDni(providerDto.getProviderDni());
         provider.setProviderName(providerDto.getProviderName());
-
         return Optional.of(provider)
                 .map(providerRepository::save)
                 .map(ProviderMapper.INSTANCE::providerToProviderDto)

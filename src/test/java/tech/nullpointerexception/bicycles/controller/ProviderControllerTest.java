@@ -1,4 +1,4 @@
-package tech.nullpointerexception.bicycles.web.controller;
+package tech.nullpointerexception.bicycles.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
@@ -14,7 +14,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import tech.nullpointerexception.bicycles.services.ProviderService;
 import tech.nullpointerexception.bicycles.util.TestConstants;
 import tech.nullpointerexception.bicycles.util.UtilConstants;
-import tech.nullpointerexception.bicycles.web.model.ProviderDto;
+import tech.nullpointerexception.bicycles.dto.ProviderDto;
 
 import static org.hamcrest.Matchers.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -23,12 +23,10 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-/**
- * TDD para Provider
- */
+
 @ExtendWith(SpringExtension.class)
-@WebMvcTest
-public class ProviderControllerTest {
+@WebMvcTest(value = ProviderController.class)
+class ProviderControllerTest {
 
     @Autowired
     MockMvc mockMvc;
@@ -71,8 +69,10 @@ public class ProviderControllerTest {
     void postProvider_when_is_ok() throws Exception {
         Mockito.when(providerService.createProvider(any())).thenReturn(TestConstants.GET_PROVIDER());
 
+
         ProviderDto providerDto = TestConstants.GET_PROVIDER();
         providerDto.setId(null); //id lo setea la bd
+        System.out.println("============> " + objectMapper.writeValueAsString(providerDto));
         mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/provider/")
                 .content(objectMapper.writeValueAsString(providerDto))
                 .contentType(MediaType.APPLICATION_JSON))
@@ -128,6 +128,7 @@ public class ProviderControllerTest {
                 .andDo(print());
 
     }
+
     @Test
     void putProvider_when_is_service_fails() throws Exception {
         Mockito.when(providerService.updateProvider(anyString(), any())).thenReturn(null);

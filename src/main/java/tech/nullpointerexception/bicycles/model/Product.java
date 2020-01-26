@@ -6,6 +6,8 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -37,10 +39,10 @@ public class Product {
     )
     private Set<Provider> providers;
 
-    public Product(String productName, Integer productQuantity, Provider...providers){
+    public Product(String productName, Integer productQuantity, List<Provider> providers){
         this.productName = productName;
         this.productQuantity = productQuantity;
-        this.providers = Stream.of(providers).collect(Collectors.toSet());
+        this.providers = new HashSet<>(providers);
         this.providers.forEach(x -> x.getProducts().add(this));
     }
 }
